@@ -1,27 +1,51 @@
 # Homelab Documentation
 
-Learning environment on Proxmox hypervisor.
+Self-hosted services on Proxmox for DevOps learning.
 
 ## Hardware
-- CPU: Intel i7-6700 (8 cores @ 3.40GHz)
-- RAM: 32GB
-- Storage: 1TB
-- Hypervisor: Proxmox VE
+- **Host**: Proxmox VE on Intel i7-6700
+- **RAM**: 32GB
+- **Storage**: 1TB
+- **Hostname**: hades
 
-## Currently Running
-- Media streaming server
-- VPN for remote access
-- Immich for picture back up
+## Services Overview
 
-## Learning Goals
-- Linux system administration
-- Docker containerization
-- Infrastructure automation with Ansible
-- CI/CD pipelines
-- Monitoring and observability
+### Media Stack (Running)
+- Jellyfin - Media server
+- Jellyseerr - Request management
+- qBittorrent - Download client
+- Prowlarr - Indexer manager
+- Radarr - Movie management
+- Sonarr - TV show management
 
-## Current Focus
-Week 1: Documenting existing setup and maybe modify it
+### Monitoring Stack (Running)
+- Prometheus - Metrics collection
+- Grafana - Visualization dashboards
+- Cockpit - System management
 
-## Progress Log
-- 2025-01-03: Repository created, beginning documentation
+### AI/Automation (Running)
+- Ollama - Local LLM hosting
+- n8n - Workflow automation
+- Immich - Photo management
+
+### Infrastructure (Mixed status)
+- Unbound - DNS resolver (stopped)
+- Pi-hole - Network ad blocker (stopped)
+- Twingate - Zero-trust access (stopped)
+- Proxmox Backup Server (stopped)
+
+### Development/Gaming (Stopped)
+- Crafty Controller
+- OpenWebUI
+- Syncthing
+- Test VMs (twitch, deJoaca)
+
+## Current State
+12 containers running, 8 stopped. Some services need password resets and proper documentation. In process of auditing, cleaning up, and documenting all services.
+
+## Documentation
+- [Complete Inventory](docs/inventory.md) - All services with access details
+- [Cleanup Plan](docs/cleanup-plan.md) - Consolidation and organization strategy
+
+## Learning Progress
+- **Week 1**: Service inventory and documentation
