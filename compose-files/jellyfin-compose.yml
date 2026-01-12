@@ -8,7 +8,7 @@ services:
     volumes:
       - ./config:/config
       - ./cache:/cache
-      - /mnt/media:/media:ro
+      - /mnt/hdd:/media:ro
     environment:
       - PUID=1000
       - PGID=1000

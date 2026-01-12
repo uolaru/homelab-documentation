@@ -9,7 +9,7 @@ services:
       - "6881:6881/udp"
     volumes:
       - ./qbittorrent/config:/config
-      - /mnt/media/downloads:/downloads
+      - /mnt/hdd/downloads:/downloads
     environment:
       - PUID=1000
       - PGID=1000
@@ -37,8 +37,8 @@ services:
       - "7878:7878"
     volumes:
       - ./radarr/config:/config
-      - /mnt/media/movies:/movies
-      - /mnt/media/downloads:/downloads
+      - /mnt/hdd/movies:/movies
+      - /mnt/hdd/downloads:/downloads
     environment:
       - PUID=1000
       - PGID=1000
@@ -52,8 +52,8 @@ services:
       - "8989:8989"
     volumes:
       - ./sonarr/config:/config
-      - /mnt/media/shows:/tv
-      - /mnt/media/downloads:/downloads
+      - /mnt/hdd/shows:/tv
+      - /mnt/hdd/downloads:/downloads
     environment:
       - PUID=1000
       - PGID=1000

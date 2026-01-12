@@ -85,7 +85,7 @@
 - **Primary:** 912GB local storage
 - **Media:** 931.5GB external HDD (/dev/sdb1)
   - Mounted at `/mnt/pve/hddextern` on host
-  - Passed through to VM 201 as `/mnt/media`
+  - Mounted in VM 201 at `/mnt/hdd`
   - 668GB used, 203GB available
 
 ## Next Actions
