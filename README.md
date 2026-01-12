@@ -36,18 +36,20 @@ Complete automated media management from request to streaming.
 
 ## Active Services
 
-### Media Stack (6 containers)
-Jellyfin • Jellyseerr • Radarr • Sonarr • Prowlarr • qBittorrent
+### Media Stack (VM 201)
+Jellyfin • Jellyseerr • Radarr • Sonarr • Prowlarr • qBittorrent • Node Exporter
 
-[Full documentation →](services/media-stack.md)
+[Full documentation →](services/media-stack-docker.md)
 
 ### AI & Automation (3 containers)
 Ollama • n8n • Immich
 
 [Full documentation →](services/ai-tools.md)
 
-### Monitoring (3 containers)
-Prometheus • Grafana • Cockpit
+### Monitoring Stack (VM 203)
+Prometheus • Grafana • Alertmanager • Node Exporter • Discord Alerts
+
+[Full documentation →](services/monitoring-stack-docker.md)
 
 ### Infrastructure (8 containers - mixed status)
 Pi-hole • Unbound • Twingate • Proxmox Backup Server • Others

@@ -52,6 +52,7 @@ Services: prometheus, grafana, alertmanager, node-exporter, alertmanager-discord
 - ollama (192.168.100.105:9100)
 - immich (192.168.100.106:9100)
 - n8n (192.168.100.107:9100)
+- pihole (192.168.100.112:9100)
 
 ## Alert Rules
 
@@ -124,7 +125,7 @@ docker compose up -d
 - Migrated scrape targets from old Prometheus config
 - Added Docker-based node-exporter for monitoring VM itself
 - Discord integration via alertmanager-discord relay (solves Slack webhook payload incompatibility)
-- Removed deprecated targets: old Grafana (108), pihole (112)
+- Added node-exporter to media-stack VM for metrics collection
 
 ## Stopped LXC Containers (can be deleted)
 

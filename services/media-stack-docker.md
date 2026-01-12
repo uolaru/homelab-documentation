@@ -9,7 +9,7 @@ Migrated from individual LXC containers to Docker Compose running in Ubuntu 22.0
 - **OS:** Ubuntu 22.04.5 LTS
 - **Resources:** 8GB RAM, 4 CPU cores, 50GB disk
 - **IP:** 192.168.100.139
-- **Media Storage:** /dev/vda (931.5GB) mounted at /mnt/media
+- **Media Storage:** /dev/sdb (931.5GB) mounted at /mnt/hdd
 
 ## Services
 
@@ -21,6 +21,7 @@ Migrated from individual LXC containers to Docker Compose running in Ubuntu 22.0
 | Radarr | 7878 | /movies, /downloads | Movie automation |
 | Sonarr | 8989 | /tv, /downloads | TV automation |
 | Jellyseerr | 5055 | - | Media requests |
+| Node Exporter | 9100 | /host | Prometheus metrics |
 
 ## Directory Structure
 ```
@@ -37,11 +38,10 @@ Migrated from individual LXC containers to Docker Compose running in Ubuntu 22.0
     ├── sonarr/config/
     └── jellyseerr/config/
 
-/mnt/media/
+/mnt/hdd/
 ├── movies/
 ├── shows/
 └── downloads/
-    └── incomplete/
 ```
 
 ## Docker Compose Files
@@ -59,7 +59,7 @@ services:
     volumes:
       - ./config:/config
       - ./cache:/cache
-      - /mnt/media:/media:ro
+      - /mnt/hdd:/media:ro
     environment:
       - PUID=1000
       - PGID=1000
@@ -86,7 +86,7 @@ All services accessible via Tailscale VPN:
 2. Jellyseerr sends request to Radarr (movies) or Sonarr (TV)
 3. Radarr/Sonarr searches via Prowlarr indexers
 4. Download sent to qBittorrent
-5. Completed files moved to /mnt/media/movies or /mnt/media/shows
+5. Completed files moved to /mnt/hdd/movies or /mnt/hdd/shows
 6. Jellyfin automatically detects new content
 7. Discord notification sent via Prowlarr webhook
 
@@ -117,10 +117,11 @@ docker compose up -d
 
 ## Migration Notes
 - Previous setup: 6 individual LXC containers (CT 101-106)
-- Path changes: `/mnt/hddextern` → `/mnt/media` on VM
+- Path changes: `/mnt/hddextern` → `/mnt/hdd` on VM
 - Docker containers see simplified paths: `/movies`, `/tv`, `/downloads`
-- Same physical storage, different mount point
+- External HDD mounted via fstab (UUID: e7f7ee75-60df-4ee5-9ac9-d8340df44b79)
 - All services run as UID/PGID 1000 (media user)
+- Node exporter added for Prometheus monitoring
 
 ## Stopped LXC Containers (can be deleted)
 - CT 101: jellyfin
@@ -133,5 +134,5 @@ docker compose up -d
 ## Next Steps
 - [ ] Delete old LXC containers after 1 week of stable operation
 - [ ] Set up automatic container updates
-- [ ] Document Prometheus scraping for Docker containers
+- [x] Document Prometheus scraping for Docker containers
 - [ ] Add backup strategy for Docker volumes
