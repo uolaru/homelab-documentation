@@ -1,0 +1,43 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alerts.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          app: 'prometheus'
+
+  - job_name: 'proxmox-host'
+    static_configs:
+      - targets: ['192.168.100.77:9100']
+
+  - job_name: 'monitoring-vm'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          instance: 'monitoring-vm'
+
+  - job_name: 'media-vm'
+    static_configs:
+      - targets: ['192.168.100.139:9100']
+        labels:
+          instance: 'media-stack'
+
+  - job_name: 'lxc-containers'
+    static_configs:
+      - targets:
+          - '192.168.100.94:9100'   # cockpit
+          - '192.168.100.105:9100'  # ollama
+          - '192.168.100.106:9100'  # immich
+          - '192.168.100.107:9100'  # n8n
+          - '192.168.100.112:9100'  # pihole
